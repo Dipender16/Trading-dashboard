@@ -8,8 +8,8 @@ function TradeCard({currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LON
 
      <div className='flex mb-2 items-center justify-between '>
        <div>
-        <h2 className='font-bold'>AUD/USD</h2>
-        <p className='text-xs'>LONG</p>
+        <h2 className='font-bold'>{currencyPair}</h2>
+        <p className='text-xs'>{tradeDirection}</p>
        </div>
        <p className={`text-xs p-1 rounded px-2 ${outcome > 0 ? "bg-green-500 text-white": "text-white bg-red-400"}`}>{outcome > 0 ? (<span>Win</span>) : (<span>Loss</span>)}</p>
      </div>
@@ -20,7 +20,7 @@ function TradeCard({currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LON
       </div>
       <div className='text-xs flex justify-between text-gray-600'>
         <p>Date</p>
-        <p>13/09/2026</p>
+        <p>{date}</p>
       </div>
       <div className='h-px my-1 bg-gray-800'></div>
       <div className='flex justify-between'>
