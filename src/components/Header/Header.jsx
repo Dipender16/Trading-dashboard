@@ -39,7 +39,12 @@ function Header() {
   },
   ]
 
-  if(loading) return null
+  if(loading) return (
+    <div className='py-3 mr-4 ml-48'>
+
+    <Logo width='70px'/>
+    </div>
+  )
 
   return (
     <header className='py-3 shadow px-48'>
