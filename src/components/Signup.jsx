@@ -29,61 +29,69 @@ function Signup() {
     }
 
   return (
-    <div className="flex items-start mt-10 justify-center h-screen">
-            <div className={`mx-auto w-full max-w-lg bg-gray-200 rounded-xl p-10 border border-black/10`}>
-            <div className="mb-2 flex justify-center">
-                    <span className="inline-block w-full max-w-25">
-                        <Logo width="100%" src='https://app.tradezella.com/static/media/tradezella-logo.db71bfd13dce99dd3e33.png'/>
-                    </span>
-                </div>
-                <h2 className="text-center text-2xl my-1 font-sans">Sign up to create account</h2>
-                <p className="mt-2 text-center text-base my-1 text-black/60">
-                    Already have an account?&nbsp;
-                    <Link
-                        to="/login"
-                        className="font-medium text-primary transition-all duration-200 hover:underline"
-                    >
-                        Sign In
-                    </Link>
-                </p>
-                {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-
-                <form onSubmit={handleSubmit(create)}>
-                    <div className='space-y-5 mt-4'>
-                        <Input
-                        label="Full Name: "
-                        placeholder="Enter your full name"
-                        {...register("name", {
-                            required: true,
-                        })}
-                        />
-                        <Input
-                        label="Email: "
-                        placeholder="Enter your email"
-                        type="email"
-                        {...register("email", {
-                            required: true,
-                            validate: {
-                                matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                                "Email address must be a valid address",
-                            }
-                        })}
-                        />
-                        <Input
-                        label="Password: "
-                        type="password"
-                        placeholder="Enter your password"
-                        {...register("password", {
-                            required: true,})}
-                        />
-                        <Button type="submit" className="w-full">
-                            Create Account
-                        </Button>
-                    </div>
-                </form>
-            </div>
-
+    <div className="flex items-start justify-center mt-10 min-h-screen px-4 sm:px-6 lg:px-36">
+  <div className="w-full max-w-md sm:max-w-lg bg-gray-200 rounded-xl p-6 sm:p-10 border border-black/10 mx-auto">
+    
+    
+    <div className="mb-4 flex justify-center">
+      <Logo
+        width="150px"
+        src="https://app.tradezella.com/static/media/tradezella-logo.db71bfd13dce99dd3e33.png"
+      />
     </div>
+
+    
+    <h2 className="text-center text-2xl sm:text-3xl my-2 font-sans font-semibold">
+      Sign up to create account
+    </h2>
+    <p className="mt-1 text-center text-sm sm:text-base text-black/60">
+      Already have an account?&nbsp;
+      <Link
+        to="/login"
+        className="font-medium text-primary transition-all duration-200 hover:underline"
+      >
+        Sign In
+      </Link>
+    </p>
+
+    
+    {error && <p className="text-red-600 mt-4 sm:mt-6 text-center">{error}</p>}
+
+    
+    <form onSubmit={handleSubmit(create)} className="mt-4 sm:mt-6">
+      <div className="space-y-4 sm:space-y-5">
+        <Input
+          label="Full Name: "
+          placeholder="Enter your full name"
+          {...register("name", { required: true })}
+        />
+        <Input
+          label="Email: "
+          placeholder="Enter your email"
+          type="email"
+          {...register("email", {
+            required: true,
+            validate: {
+              matchPatern: (value) =>
+                /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                "Email address must be a valid address",
+            },
+          })}
+        />
+        <Input
+          label="Password: "
+          type="password"
+          placeholder="Enter your password"
+          {...register("password", { required: true })}
+        />
+        <Button type="submit" className="w-full py-2 sm:py-3">
+          Create Account
+        </Button>
+      </div>
+    </form>
+  </div>
+</div>
+
   )
 }
 

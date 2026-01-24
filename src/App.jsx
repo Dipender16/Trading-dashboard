@@ -1,33 +1,38 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import conf from './conf/conf'
 import { Header } from './components'
 import { Outlet } from 'react-router-dom'
-import Footer from './components/Footer/Footer'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import authService from './appwrite/auth'
 import { logout, login, authChecked } from './store/authSlice'
+import Loader from './components/Loader'
 
 function App() {
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading)
 
   useEffect(() => {
   const checkSession = async () => {
     try {
       const userData = await authService.getCurrentUser();
-      dispatch(login({ userData }));
+      if(userData) dispatch(login({ userData }));
     } catch {
       dispatch(logout());
     } finally {
-      dispatch(authChecked());
+      setTimeout(() => {
+    dispatch(authChecked());
+  }, 1000);
     }
   };
 
   checkSession();
 }, [dispatch]);
 
+if (loading) {
+  return (
+    <Loader/>
+  );
+}
 
 
   return (

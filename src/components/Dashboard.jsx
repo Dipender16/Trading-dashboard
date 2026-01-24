@@ -5,12 +5,15 @@ import StatCard from './Cards/StatCard';
 import BottomCard from './Cards/BottomCard';
 import TradingCalendar from './Calendar/TradingCalendar';
 import { Query } from 'appwrite';
+import Loader from './Loader';
 
 
 function Dashboard() {
     const [allTrades, setAllTrades] = useState([]);
+    const [loading, setLoading] = useState(true);
 
      useEffect(() => {
+      setLoading(true)
   const fetchTrades = async () => {
     try {
       const user = await authService.getCurrentUser();
@@ -20,6 +23,8 @@ function Dashboard() {
       setAllTrades(result);
     } catch (err) {
       console.error("Dashboard fetch error:", err);
+    } finally{
+      setLoading(false);
     }
   };
 
@@ -76,37 +81,44 @@ const grossLoss = Math.abs(
 const profitFactor =
   grossLoss === 0 ? "∞" : (grossProfit / grossLoss).toFixed(2);
 
+  if (loading) {
+  return (
+    <Loader/>
+  );
+}
+
+
 
 
 
   return (
-    <section className="min-h-screen  text-gray-700  mx-36 mt-10 mb-0 pb-10">
+    <section className="min-h-screen  text-gray-700  m-10 pb-10 lg:mx-24">
         
       
-      <div className="mb-8">
-        <h1 className="text-4xl font-semibold">Trading Dashboard</h1>
-        <p className="text-sm ">
+       <div className="mb-8">
+        <h1 className="text-2xl md:text-3xl text-center md:text-start font-semibold">Trading Dashboard</h1>
+        <p className="text-xs md:text-sm text-center md:text-start">
           Your trading performance at a glance
         </p>
       </div>
 
       
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-3 gap-3 md:gap-6">
         
         
-        <div className="col-span-2 relative rounded-3xl p-8 bg-gray-200">
+        <div className="col-span-3 md:col-span-2 relative rounded-3xl p-4 md:p-8 bg-gray-200">
           
           
-          <div className="absolute top-6 right-6 w-14 h-14 rounded-2xl bg-gray-100  flex items-center justify-center">
-            <span className="text-3xl text-emerald-500">$</span>
+          <div className="absolute top-6 right-6 w-8 h-8 md:w-14 md:h-14 rounded-lg md:rounded-2xl bg-gray-100  flex items-center justify-center">
+            <span className="text-xl text-emerald-500">$</span>
           </div>
 
-          <p className="text-sm text-gray-800">Net Profit & Loss</p>
-          <h2 className="text-5xl font-bold text-emerald-600 mt-2">
+          <p className="text-xs md:text-sm text-gray-800">Net Profit & Loss</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-emerald-600 mt-2">
             ${netPnL}
           </h2>
-          <p className="text-sm text-emerald-600 mt-1">
-            + 1 trades completed
+          <p className="text-xs md:text-sm text-emerald-600 mt-1">
+            {totalTrades} trades completed
           </p>
 
           
@@ -118,22 +130,22 @@ const profitFactor =
         </div>
 
         
-        <div className="flex flex-col gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-1 col-span-3 md:col-span-1 gap-3 md:gap-6">
           
           
-          <div className="rounded-3xl p-6 bg-gray-200">
-            <p className="text-sm text-gray-700">Total Profit</p>
-            <h3 className="text-3xl font-bold mt-2">${totalProfit}</h3>
-            <p className="text-sm text-emerald-600 mt-1">
+          <div className="rounded-3xl flex flex-col justify-center  p-4 md:p-6 bg-gray-200">
+            <p className="text-xs md:text-sm text-gray-700">Total Profit</p>
+            <h3 className="text-2xl md:text-4xl font-bold mt-2">${totalProfit}</h3>
+            <p className="text-xs md:text-sm text-emerald-600 mt-1">
               {winningTrades.length} winning trades
             </p>
           </div>
 
           
-          <div className="rounded-3xl p-6 bg-gray-200">
-            <p className="text-sm text-gray-700">Total Loss</p>
-            <h3 className="text-3xl font-bold mt-2">{totalLoss}</h3>
-            <p className="text-sm text-red-600 mt-1">
+          <div className="rounded-3xl flex flex-col justify-center  p-4 md:p-6 bg-gray-200">
+            <p className="text-xs md:text-sm text-gray-700">Total Loss</p>
+            <h3 className="text-2xl md:text-4xl font-bold mt-2">{totalLoss}</h3>
+            <p className="text-xs md:text-sm text-red-600 mt-1">
               {lossingTrades.length} losing trades
             </p>
           </div>
@@ -141,11 +153,11 @@ const profitFactor =
       </div>
 
       
-      <div className="grid grid-cols-3 gap-6 mt-8">
-        <BottomCard label="Largest Win" value={largestWin} />
-        <BottomCard label="Largest Loss" value={largestLoss} />
+      <div className="grid sm:grid-cols-3 grid-cols-2 gap-6 mt-8">
+        <BottomCard label="Largest Win" value={`$${largestWin}`} />
+        <BottomCard label="Largest Loss" value={`$${largestLoss}`} />
         <BottomCard label="Total Trades" value={allTrades.length} />
-      </div>
+      </div> 
 
 
 

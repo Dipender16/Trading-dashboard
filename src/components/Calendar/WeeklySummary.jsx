@@ -1,6 +1,14 @@
 import React from "react";
+import Loader from "../Loader";
 
-function WeeklySummary({ trades = [], currentDate }) {
+function WeeklySummary({ trades = [], currentDate, loading }) {
+  if (loading) {
+  return (
+    <div className="w-full md:w-72 mt-20 flex justify-center items-center h-40">
+      <Loader />
+    </div>
+  );
+}
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
@@ -8,23 +16,25 @@ function WeeklySummary({ trades = [], currentDate }) {
   const firstDay = new Date(year, month, 1).getDay();
 
   const weeks = {};
-  const weeksPnl = [0, 0, 0, 0, 0];
+  const weeksPnl = Array(5).fill(0);
 
   trades.forEach((trade) => {
     const tradeDate = new Date(trade.$createdAt);
     const day = tradeDate.getDate();
 
-    const week = Math.floor((firstDay + day - 1) / 7) + 1;
+    const weekIndex = Math.floor((firstDay + day - 1) / 7);
 
-    weeksPnl[week] += trade.outcome;
+    const outcome = Number(trade.outcome) || 0;
 
-    if (!weeks[week]) weeks[week] = [];
-    weeks[week].push(trade);
+    weeksPnl[weekIndex] += outcome;
+
+    if (!weeks[weekIndex]) weeks[weekIndex] = [];
+    weeks[weekIndex].push(trade);
   });
 
   return (
-    <div className="w-72 space-y-4 mt-20">
-      {[1, 2, 3, 4, 5].map((week) => {
+    <div className="space-y-4 mt-20">
+      {[0, 1, 2, 3, 4].map((week) => {
         const weekTrades = weeks[week] || [];
 
         return (
@@ -32,9 +42,9 @@ function WeeklySummary({ trades = [], currentDate }) {
             key={week}
             className="p-4 rounded-xl bg-gray-100 h-27 flex flex-col justify-center"
           >
-            <p className="text-sm text-slate-400">Week {week}</p>
+            <p className="text-xs sm:text-sm text-slate-400">Week {week}</p>
 
-            <p className="text-green-400 font-semibold">
+            <p className="text-green-400 text-sm sm:text-xl font-semibold">
               {weekTrades.length} trades
             </p>
             <p

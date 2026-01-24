@@ -25,7 +25,7 @@ function CalendarGrid({currentDate, trades = []}) {
   }
   return (
     <>
-     <div className="grid grid-cols-7 text-center gap-3 text-gray-700 mb-2">
+     <div className="grid grid-cols-7 text-center gap-3 text-xs sm:text-sm text-gray-700 mb-2">
       <p>Sun</p>
       <p>Mon</p>
       <p>Tue</p>
@@ -34,7 +34,7 @@ function CalendarGrid({currentDate, trades = []}) {
       <p>Fri</p>
       <p>Sat</p>
      </div>
-     <div className="grid grid-cols-7 gap-3">
+     <div className="grid grid-cols-7 gap-0.5 sm:gap-2">
       {cells}
     </div>
     </>
