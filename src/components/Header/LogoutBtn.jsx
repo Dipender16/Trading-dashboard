@@ -7,11 +7,13 @@ import { useNavigate } from 'react-router-dom'
 function LogoutBtn() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const logoutHandler = () => {
-        authService.logout().then(() => {
-            dispatch(logout())
-            navigate('/')
-        })
+    const logoutHandler = async() => {
+      try{
+
+        await authService.logout()
+          dispatch(logout())
+          navigate('/')
+      } catch(err){console.error("Logout failed", err);} 
     }
   return (
     <button
