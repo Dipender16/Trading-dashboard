@@ -8,32 +8,33 @@ import { Outlet } from 'react-router-dom'
 import Footer from './components/Footer/Footer'
 import { useDispatch } from 'react-redux'
 import authService from './appwrite/auth'
-import { logout, login } from './store/authSlice'
+import { logout, login, authChecked } from './store/authSlice'
 
 function App() {
-  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    authService.getCurrentUser().then((userData)=>{
-      if(userData){
-        dispatch(login({userData}));
-      }else{
-        dispatch(logout())
-      }
-    }).finally(()=>{
-      setLoading(false);
-    })
+  useEffect(() => {
+  const checkSession = async () => {
+    try {
+      const userData = await authService.getCurrentUser();
+      dispatch(login({ userData }));
+    } catch {
+      dispatch(logout());
+    } finally {
+      dispatch(authChecked());
+    }
+  };
 
-  }, [])
+  checkSession();
+}, [dispatch]);
+
 
 
   return (
     <>
-      <div className='bg-gray-100'>
+      <div className='bg-gray-100 h-full'>
       <Header/>
        <Outlet/>
-       <Footer/>
       </div>
     </>
   )

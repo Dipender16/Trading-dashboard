@@ -12,45 +12,59 @@ function AddTrade({ open, onClose, totalConfluence }) {
   const [entryPrice, setEntryPrice] = useState("");
   const [risk, setRisk] = useState("");
   const [lotSize, setLotSize] = useState("");
-  const [outcome, setOutcome] = useState("");
+  const [outcome, setOutcome] = useState(0);
   const [tradeResult, setTradeResult] = useState("");
   const [chartImage, setChartImage] = useState(null);
 
   if (!open) return null;
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const user = await authService.getCurrentUser();
-
-      if (!chartImage) {
-        alert("Chart image is required");
-        return;
-      }
-
-      const uploaded = await trades.uploadFile(chartImage);
-
-      const tradeData = {
-        userId: user.$id,
-        currencyPair,
-        tradeDirection,
-        totalConfluence: Number(totalConfluence),
-        date: new Date(),
-        chart: uploaded.$id,
-        outcome,
-        tradeResult
-      };
-
-      await trades.addTrade(tradeData);
-
-      alert("Trade saved successfully");
-      onClose();
-    } catch (err) {
-      console.error(err);
-      alert("Failed to save trade");
+  try {
+    const user = await authService.getCurrentUser();
+    if (!user) {
+      alert("User not logged in");
+      return;
     }
-  };
+
+    if (!currencyPair || !tradeDirection || !outcome || !tradeResult) {
+      alert("Please fill all required fields");
+      return;
+    }
+
+    if (!chartImage) {
+      alert("Chart image is required");
+      return;
+    }
+
+    if (isNaN(totalConfluence)) {
+      alert("Total confluence must be a number");
+      return;
+    }
+
+    const uploaded = await trades.uploadFile(chartImage);
+
+    const tradeData = {
+      userId: user.$id,
+      currencyPair,
+      tradeDirection,
+      totalConfluence: Number(totalConfluence),
+      chart: uploaded.$id || uploaded.fileId,
+      outcome: Number(outcome),
+      tradeResult,
+    };
+
+    await trades.addTrade(tradeData);
+
+    alert("Trade saved successfully");
+    onClose();
+  } catch (err) {
+    console.error("Appwrite Error:", err);
+    alert(err.message || "Failed to save trade");
+  }
+};
+
 
   return (
     <>

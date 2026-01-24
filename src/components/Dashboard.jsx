@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import trades from "../appwrite/tradeManagement";
 import authService from "../appwrite/auth";
 import StatCard from './Cards/StatCard';
 import BottomCard from './Cards/BottomCard';
+import TradingCalendar from './Calendar/TradingCalendar';
+import { Query } from 'appwrite';
+
 
 function Dashboard() {
     const [allTrades, setAllTrades] = useState([]);
@@ -13,7 +16,7 @@ function Dashboard() {
       const user = await authService.getCurrentUser();
       if (!user) return;
 
-      const result = await trades.getTrades();
+      const result = await trades.getTrades([Query.equal("userId", user.$id)]);
       setAllTrades(result);
     } catch (err) {
       console.error("Dashboard fetch error:", err);
@@ -77,8 +80,8 @@ const profitFactor =
 
 
   return (
-    <section className="min-h-screen  text-gray-700  mx-36 mt-10 mb-0">
-      
+    <section className="min-h-screen  text-gray-700  mx-36 mt-10 mb-0 pb-10">
+        
       
       <div className="mb-8">
         <h1 className="text-4xl font-semibold">Trading Dashboard</h1>
@@ -144,6 +147,10 @@ const profitFactor =
         <BottomCard label="Total Trades" value={allTrades.length} />
       </div>
 
+
+
+      
+      <TradingCalendar/>
     </section>
   );
 }

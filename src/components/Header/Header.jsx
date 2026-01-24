@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom'
 import LogoutBtn from './LogoutBtn'
 
 function Header() {
-  const authStatus = useSelector((state) => state.auth.status)
+  const authStatus = useSelector((state) => state.auth.status);
+  const loading = useSelector((state) => state.auth.loading);
+
   const navigate = useNavigate()
 
   const navItems = [ 
@@ -37,9 +39,10 @@ function Header() {
   },
   ]
 
+  if(loading) return null
 
   return (
-    <header className='py-3 shadow '>
+    <header className='py-3 shadow px-48'>
       <Container>
         <nav className='flex'>
           <div className='mr-4'>

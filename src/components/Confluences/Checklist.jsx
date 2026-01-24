@@ -19,7 +19,7 @@ function Checklist() {
 
 
   return (
-    <div className='flex flex-col justify-center items-center m-10 w-full'>
+    <div className='flex flex-col justify-center items-center py-10 w-full'>
         <div className='mb-5'>
          <h1 className='text-center text-4xl font-sans font-medium'>Trade Confluences</h1>
          <p className='text-center text-xl font-sans font-light'>Select the conditions that are present in your next trade</p>

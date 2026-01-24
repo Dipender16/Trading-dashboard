@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import TradeCard from "./TradeCard";
 import trades from "../appwrite/tradeManagement";
 import authService from "../appwrite/auth";
-import { Query } from "appwrite"; // Add this at the top
+import { Query } from "appwrite";
+
 
 function History() {
   const [tradesType, setTradesType] = useState("All");
@@ -16,7 +17,7 @@ function History() {
           console.log("User not logged in");
           return;
         }
-        let queries = [];
+        let queries = [Query.equal("userId", user.$id)];
         if (tradesType === "Win") queries = [Query.equal("tradeResult", "Win")];
         else if (tradesType === "Loss")
           queries = [Query.equal("tradeResult", "Loss")];
@@ -34,7 +35,7 @@ function History() {
   }, [tradesType]);
 
   return (
-    <section className="mx-36 my-10">
+    <section className="mx-36 my-10 h-screen">
       <h1 className="text-4xl mb-1 font-thin font-sans">Trading History</h1>
       <p className="text-sm font-sans font-extralight">
         View and manage your trading journal
@@ -77,10 +78,11 @@ function History() {
             outcome={trade.outcome}
             tradeDirection={trade.tradeDirection}
             totalConfluence={trade.totalConfluence}
-            date={trade.date}
+            date={trade.$createdAt}
           />
         ))}
       </div>
+
     </section>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import Button from './Button'
 
 function TradeCard({currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LONG", totalConfluence = 15, date = "1/3/26"}) {
+  date = new Date(date);
   
   return (
     <div className='bg-gray-200 p-4 w-72 rounded-xl'>
@@ -20,7 +21,7 @@ function TradeCard({currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LON
       </div>
       <div className='text-xs flex justify-between text-gray-600'>
         <p>Date</p>
-        <p>{date}</p>
+        <p>{`${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`}</p>
       </div>
       <div className='h-px my-1 bg-gray-800'></div>
       <div className='flex justify-between'>
