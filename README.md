@@ -86,3 +86,24 @@ http://localhost:5173
 npm run build
 npm run preview
 ```
+## 🔮 Future Updates
+
+Planned enhancements and features for upcoming versions of the Trading Dashboard:
+
+- 📊 **Advanced Analytics & Charts** —
+Interactive charts for equity curve, drawdown, and performance over time.
+
+- 🤖 **AI-Based Trade Insights** —
+Smart insights to identify patterns, strengths, and weaknesses in trading behavior.
+
+- 📤 **Trade Exporting** —
+Export trades and analytics data to CSV or Excel for external analysis.
+
+- 🌙 **Dark Mode** —
+Improved UI experience with light and dark theme support.
+
+- 📱 **Mobile Experience Improvements** —
+Enhanced mobile-first layouts and performance optimizations.
+
+- 🔔 **Notifications & Alerts** —
+Reminders for journaling trades and alerts for performance milestones.
