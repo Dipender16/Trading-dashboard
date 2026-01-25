@@ -86,6 +86,7 @@ http://localhost:5173
 npm run build
 npm run preview
 ```
+---
 ## 🔮 Future Updates
 
 Planned enhancements and features for upcoming versions of the Trading Dashboard:
