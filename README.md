@@ -1,29 +1,31 @@
-📈 Trading Dashboard
+## 📈 Trading Dashboard
 
 A modern **Trading Dashboard** web application that helps traders track and analyze their trading performance with clear and meaningful metrics. This dashboard provides insights such as Net Profit & Loss, Win Rate, Profit Factor, Confluence scores, and more — all in a clean and responsive UI.
 
-🔗 **Live Demo:** https://trading-dashboard-pink.vercel.app 
+🔗 **Live Demo:** https://trading-dashboard-pink.vercel.app
 
 ---
 
- 🧠 About
+## 🧠 About
 
 Trading Dashboard is a **React-based analytics app** built to help traders visualize and understand their trading behavior and performance over time. It focuses on simplicity, usability, and actionable insights — making it easier for users to journal trades and improve their strategy.
 
 Key highlights include trade filtering, detailed confluence metrics, calendar-based trade history view, and analytics summaries that make performance tracking intuitive.
 
- 🚀 Features
+---
 
-- 📊 **Performance Metrics** — Net Profit & Loss, Win Rate, Profit Factor, Average Confluence.  
-- 📅 **Trading Calendar** — visualize trades by date with weekly summaries.   
-- 📈 **Trade Filtering** — filter trades by outcome: All, Wins, Losses, and Breakevens.  
-- 📃 **Responsive UI** — built with Tailwind CSS for mobile and desktop.  
-- 🔐 **Authentication** — secure login, signup with session management.   
-- 📂 **Trade Journal** — easily add, view, and manage trade entries.
+## 🚀 Features
+
+- 📊 **Performance Metrics** — Net Profit & Loss, Win Rate, Profit Factor, Average Confluence  
+- 📅 **Trading Calendar** — visualize trades by date with weekly summaries  
+- 📈 **Trade Filtering** — filter trades by outcome: All, Wins, Losses, and Breakevens  
+- 📃 **Responsive UI** — built with Tailwind CSS for mobile and desktop  
+- 🔐 **Authentication** — secure login and signup with session management  
+- 📂 **Trade Journal** — easily add, view, and manage trade entries  
 
 ---
 
- 🧾 Tech Stack
+## 🧾 Tech Stack
 
 | Layer | Technology |
 |------|------------|
@@ -38,14 +40,11 @@ Key highlights include trade filtering, detailed confluence metrics, calendar-ba
 | Language | JavaScript |
 | Others | HTML, CSS |
 
+---
 
+## 🛠️ Getting Started
 
-
- 🛠️ Getting Started
-
- 📋 Prerequisites
-
-Make sure you have:
+### 📋 Prerequisites
 
 - Node.js (v14+ recommended)
 - npm or Yarn
@@ -53,31 +52,36 @@ Make sure you have:
 
 ---
 
-⚙️ Installation
-1. Clone the repository
+### ⚙️ Installation
+
+#### 1. Clone the repository
+
 ```bash
 git clone https://github.com/Dipender16/Trading-dashboard.git
 cd Trading-dashboard
 ```
 
-3. Install dependencies
+#### 2. Install dependencies
+   
 ```bash
 npm install
 ```
 
-3. Run the development server
+#### 3. Run the development server
+
 ```bash
 npm run dev
 ```
 
-4. Open your browser
+#### 4. Open your browser
 
 Navigate to:
-```arduino
+```text
 http://localhost:5173
 ```
 
-🏗️ Build for Production
+#### 5. Build for Production
+
 ```bash
 npm run build
 npm run preview
