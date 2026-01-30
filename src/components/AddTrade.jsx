@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import trades from "../appwrite/tradeManagement";
 import authService from "../appwrite/auth";
-import { data } from "react-router-dom";
 
 function AddTrade({ open, onClose, totalConfluence }) {
   const [tradeDirection, setTradeDirection] = useState("");
@@ -14,9 +13,12 @@ function AddTrade({ open, onClose, totalConfluence }) {
   const [lotSize, setLotSize] = useState("");
   const [outcome, setOutcome] = useState(0);
   const [tradeResult, setTradeResult] = useState("");
-  const [chartImage, setChartImage] = useState(null);
+  const [beforeChartImage, setBeforeChartImage] = useState(null);
+  const [afterChartImage, setAfterChartImage] = useState(null);
 
   if (!open) return null;
+  
+  
 
   const handleSubmit = async (e) => {
   e.preventDefault();
@@ -28,13 +30,17 @@ function AddTrade({ open, onClose, totalConfluence }) {
       return;
     }
 
-    if (!currencyPair || !tradeDirection || !outcome || !tradeResult) {
+    if (!currencyPair || !tradeDirection || !tradeResult) {
       alert("Please fill all required fields");
       return;
     }
 
-    if (!chartImage) {
-      alert("Chart image is required");
+    if (!beforeChartImage) {
+      alert("Before Chart image is required");
+      return;
+    }
+    if (!afterChartImage) {
+      alert("After Chart image is required");
       return;
     }
 
@@ -43,14 +49,16 @@ function AddTrade({ open, onClose, totalConfluence }) {
       return;
     }
 
-    const uploaded = await trades.uploadFile(chartImage);
+    const beforeChartUploaded = await trades.uploadFile(beforeChartImage);
+    const afterChartUploaded = await trades.uploadFile(afterChartImage);
 
     const tradeData = {
       userId: user.$id,
       currencyPair,
       tradeDirection,
       totalConfluence: Number(totalConfluence),
-      chart: uploaded.$id || uploaded.fileId,
+      beforeChart: beforeChartUploaded.$id,
+      afterChart: afterChartUploaded.$id,
       outcome: Number(outcome),
       tradeResult,
     };
@@ -236,7 +244,7 @@ function AddTrade({ open, onClose, totalConfluence }) {
                   type="file"
                   accept="image/png, image/jpeg"
                   className="hidden"
-                  onChange={(e) => setChartImage(e.target.files[0])}
+                  onChange={(e) => setBeforeChartImage(e.target.files[0])}
                 />
 
                 <svg
@@ -255,8 +263,53 @@ function AddTrade({ open, onClose, totalConfluence }) {
                 </svg>
 
                 <p className="text-sm text-gray-700">
-                  {chartImage
-                    ? chartImage.name
+                  {beforeChartImage
+                    ? beforeChartImage.name
+                    : "Click to upload before-trade chart"}
+                </p>
+
+                <p className="text-xs text-gray-700 mt-1">
+                  PNG, JPG up to 10MB (1 image only)
+                </p>
+              </label>
+            </div>
+
+            <div>
+              <label className="text-sm text-gray-700">
+                Chart Image (After Trade) *
+              </label>
+
+              <label
+                className="mt-2 flex flex-col items-center justify-center cursor-pointer
+                    border border-dashed border-black rounded-xl
+                     hover:bg-slate-300/80
+                    transition p-6 text-center"
+              >
+                <input
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  className="hidden"
+                  onChange={(e) => setAfterChartImage(e.target.files[0])}
+                />
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-8 h-8 text-gray-700 mb-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M7 16V12M12 16V8M17 16V10M3 20h18"
+                  />
+                </svg>
+
+                <p className="text-sm text-gray-700">
+                  {afterChartImage
+                    ? afterChartImage.name
                     : "Click to upload before-trade chart"}
                 </p>
 

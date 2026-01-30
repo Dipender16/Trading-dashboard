@@ -10,6 +10,9 @@ function History() {
   const [tradesType, setTradesType] = useState("All");
   const [allTrades, setAllTrades] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  
+  
   useEffect(() => {
     setLoading(true);
     const fetchTrades = async () => {
@@ -35,6 +38,8 @@ function History() {
 
     fetchTrades();
   }, [tradesType]);
+
+
 
   if(loading) return (
     <section className="mx-4 sm:mx-6 lg:mx-36 mt-10 min-h-screen">
@@ -99,6 +104,9 @@ function History() {
         tradeDirection={trade.tradeDirection}
         totalConfluence={trade.totalConfluence}
         date={trade.$createdAt}
+        beforeChart={trade.beforeChart}
+        afterChart={trade.afterChart}
+        tradeResult={trade.tradeResult}
       />
     ))}
   </div>

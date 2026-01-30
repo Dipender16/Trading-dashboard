@@ -27,7 +27,8 @@ export class Trades {
     currencyPair,
     tradeDirection,
     totalConfluence,
-    chart,
+    beforeChart,
+    afterChart,
     outcome,
     tradeResult,
   }) {
@@ -41,7 +42,8 @@ export class Trades {
           currencyPair,
           tradeDirection,
           totalConfluence: Number(totalConfluence),
-          chart,
+          beforeChart,
+          afterChart,
           outcome,
           tradeResult,
         },
@@ -53,20 +55,27 @@ export class Trades {
   }
 
   async getTrades(queries) {
-  try {
-    const response = await this.databases.listDocuments(
-      conf.appwriteDatabaseId, 
-      conf.appwriteCollectionId, 
-      queries?.length ? queries : undefined 
-    );
-    return response.documents;
-  } catch(err){
-    console.error("Error fetching trades:", err);
-    return []; 
+    try {
+      const response = await this.databases.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteCollectionId,
+        queries?.length ? queries : undefined,
+      );
+      return response.documents;
+    } catch (err) {
+      console.error("Error fetching trades:", err);
+      return [];
+    }
   }
-}
 
+  getImagePreview(fileId) {
+    if (!fileId) return null;
 
+    return this.bucket.getFileView(
+      conf.appwriteBucketId,
+      fileId
+    )
+  }
 
   async uploadFile(file) {
     return this.bucket.createFile(conf.appwriteBucketId, ID.unique(), file, [

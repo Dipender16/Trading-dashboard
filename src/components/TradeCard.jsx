@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from './Button'
+import TradePreview from './TradePreview/TradePreview';
 
-function TradeCard({currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LONG", totalConfluence = 15, date = "1/3/26"}) {
+function TradeCard({ currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LONG", totalConfluence = 15, date = "1/3/26", beforeChart, afterChart, tradeResult}) {
   date = new Date(date);
+
+  const [open, setOpen] = useState(false);
+  const tradeData = {
+    currencyPair,
+    outcome,
+    tradeDirection,
+    totalConfluence,
+    date : `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`,
+    beforeChart,
+    afterChart,
+    tradeResult
+  }
   
   return (
     <div className='bg-gray-200 p-4 w-72 rounded-xl'>
@@ -29,11 +42,13 @@ function TradeCard({currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LON
         <p className={`${outcome === 0 ? "text-gray-700" : ""} ${outcome > 0? "text-green-600": "text-red-500"} text-xs font-bold`}>${outcome}</p>
       </div>
      </div>
-     <div>
+     <div className='flex justify-between'>
 
-      <Button children={"Update Trade"} className='text-xs mt-4'/>
+      <Button children={"View"} className='text-xs mt-4' onClick={() => setOpen(true)}/>
       <Button children={"Delete" } className='text-xs mt-4 ml-2'/>
      </div>
+
+     <TradePreview open={open} onClose={()=> setOpen(false)} trade={tradeData}/>
 
 
     </div>
