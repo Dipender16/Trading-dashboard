@@ -19,7 +19,7 @@ function Home() {
       ...but your spreadsheets never told you.
     </p>
     <p className='text-base sm:text-lg text-gray-600 lg:mr-16'>
-      TradeZella shows you the metrics that matter–and the behaviours that lead to profit with the power of journaling and analytics.
+      Edgejournal shows you the metrics that matter–and the behaviours that lead to profit with the power of journaling and analytics.
     </p>
     {authStatus ? (
       <Button
