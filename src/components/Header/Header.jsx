@@ -3,7 +3,7 @@ import { Container, Logo } from "../index";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LogoutBtn from "./LogoutBtn";
-
+import logo from "../../assets/logo.png"
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
   const loading = useSelector((state) => state.auth.loading);
@@ -22,7 +22,7 @@ function Header() {
   if (loading) {
     return (
       <div className="py-3 px-6">
-        <Logo width="70px" />
+        <Logo width="70px" src={logo}/>
       </div>
     );
   }
@@ -31,10 +31,10 @@ function Header() {
     <header className="py-3 shadow md:px-24">
       <Container>
         <nav className="flex items-center justify-between">
-          {/* Logo */}
-          <Logo />
+          
+          <Logo src={logo}/>
 
-          {/* Desktop Menu */}
+          
           <ul className="hidden md:flex items-center ml-auto">
             {navItems.map(
               (item) =>
@@ -56,7 +56,7 @@ function Header() {
             )}
           </ul>
 
-          {/* Mobile Hamburger */}
+          
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden text-2xl ml-auto"
@@ -65,7 +65,7 @@ function Header() {
           </button>
         </nav>
 
-        {/* Mobile Dropdown */}
+        
         {menuOpen && (
           <div className="md:hidden mt-3 bg-gray-100 rounded-xl shadow-lg overflow-hidden">
             <ul className="flex flex-col">
