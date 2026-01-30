@@ -44,7 +44,7 @@ function WeeklySummary({ trades = [], currentDate, loading }) {
           >
             <p className="text-xs sm:text-sm text-slate-400">Week {week}</p>
 
-            <p className="text-green-400 text-sm sm:text-xl font-semibold">
+            <p className="text-gray-700 text-sm my-1 ">
               {weekTrades.length} trades
             </p>
             <p

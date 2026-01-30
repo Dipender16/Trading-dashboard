@@ -1,7 +1,7 @@
 function ChartImage({ src, label }) {
   return (
-    <div className="bg-slate-800 rounded-lg p-2">
-      <p className="text-xs text-gray-400 mb-2">{label}</p>
+    <div className="bg-slate-100 rounded-lg p-2">
+      <p className="text-xs text-gray-700 mb-2">{label}</p>
       <img
         src={src}
         alt={label}

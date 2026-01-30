@@ -37,9 +37,22 @@ function History() {
     };
 
     fetchTrades();
-  }, [tradesType]);
+  }, [tradesType, setAllTrades]);
 
 
+  const deleteTrade = async(tradeId)=>{
+    try{
+      await trades.deleteTrade(tradeId)
+
+      setAllTrades(prev => prev.filter(trade => trade.$id !== tradeId));
+    }catch(err){
+      throw err;
+    }
+  };
+
+  useEffect(()=>{
+    
+  },[deleteTrade])
 
   if(loading) return (
     <section className="mx-4 sm:mx-6 lg:mx-36 mt-10 min-h-screen">
@@ -99,6 +112,7 @@ function History() {
     {allTrades?.map((trade) => (
       <TradeCard
         key={trade.$id}
+        tradeId={trade.$id}
         currencyPair={trade.currencyPair}
         outcome={trade.outcome}
         tradeDirection={trade.tradeDirection}
@@ -107,6 +121,7 @@ function History() {
         beforeChart={trade.beforeChart}
         afterChart={trade.afterChart}
         tradeResult={trade.tradeResult}
+        onDelete={deleteTrade}
       />
     ))}
   </div>

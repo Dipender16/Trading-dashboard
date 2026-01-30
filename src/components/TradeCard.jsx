@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from './Button'
 import TradePreview from './TradePreview/TradePreview';
+import trades from '../appwrite/tradeManagement';
 
-function TradeCard({ currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LONG", totalConfluence = 15, date = "1/3/26", beforeChart, afterChart, tradeResult}) {
+function TradeCard({ currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LONG", totalConfluence = 15, date = "1/3/26", beforeChart, afterChart, tradeResult, tradeId, onDelete}) {
   date = new Date(date);
 
   const [open, setOpen] = useState(false);
@@ -16,6 +17,8 @@ function TradeCard({ currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LO
     afterChart,
     tradeResult
   }
+
+  
   
   return (
     <div className='bg-gray-200 p-4 w-72 rounded-xl'>
@@ -45,7 +48,7 @@ function TradeCard({ currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LO
      <div className='flex justify-between'>
 
       <Button children={"View"} className='text-xs mt-4' onClick={() => setOpen(true)}/>
-      <Button children={"Delete" } className='text-xs mt-4 ml-2'/>
+      <Button children={"Delete" } className='text-xs mt-4 ml-2' onClick={()=> onDelete(tradeId)}/>
      </div>
 
      <TradePreview open={open} onClose={()=> setOpen(false)} trade={tradeData}/>

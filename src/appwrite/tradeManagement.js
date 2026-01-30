@@ -77,6 +77,15 @@ export class Trades {
     )
   }
 
+  async deleteTrade(id){
+    try{
+      await this.databases.deleteDocument(conf.appwriteDatabaseId, conf.appwriteCollectionId, id)
+      
+    }catch(err){
+      throw err
+    }
+  }
+
   async uploadFile(file) {
     return this.bucket.createFile(conf.appwriteBucketId, ID.unique(), file, [
       Permission.read(Role.users()),

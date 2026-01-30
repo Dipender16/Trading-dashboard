@@ -114,15 +114,15 @@ const profitFactor =
           </div>
 
           <p className="text-xs md:text-sm text-gray-800">Net Profit & Loss</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-emerald-600 mt-2">
+          <h2 className={`text-3xl md:text-5xl font-bold ${netPnL>=0? "text-emerald-600":"text-red-500"} mt-2`}>
             ${netPnL}
           </h2>
-          <p className="text-xs md:text-sm text-emerald-600 mt-1">
+          <p className={`text-xs md:text-sm text-emerald-600 mt-1 ${netPnL>=0? "text-emerald-600":"text-red-500"}`}>
             {totalTrades} trades completed
           </p>
 
           
-          <div className="grid grid-cols-3 gap-4 mt-8">
+          <div className="grid grid-cols-3 gap-4 mt-8 ">
             <StatCard label="Win Rate" value={winRate} />
             <StatCard label="Profit Factor" value={profitFactor} />
             <StatCard label="Avg Confluence" value={avgConfluence} />

@@ -13,7 +13,6 @@ function TradingCalendar() {
   useEffect(() => {
     setLoading(true)
     fetchMonthlyTrades(currentDate).then((data) => {
-      console.log("MONTH TRADES:", data);
       setTrades(data);
     }).catch((err)=>{ console.error(err);
       setTrades([])}).finally(setLoading(false))
