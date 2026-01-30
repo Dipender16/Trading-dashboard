@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Logo({
-  src= "/public/LOGO.png",
+  src= "/LOGO.png",
   className
 }) {
   return (
