@@ -1,6 +1,7 @@
+import logo from "../assets/logo.png";
 
 function Logo({
-  src= "/LOGO.png",
+  src= logo,
   className
 }) {
   return (
