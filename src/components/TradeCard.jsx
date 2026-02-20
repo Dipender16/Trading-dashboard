@@ -48,7 +48,7 @@ function TradeCard({ currencyPair = "AUD/USD",outcome = 10, tradeDirection = "LO
      <div className='flex justify-between'>
 
       <Button children={"View"} className='text-xs mt-4' onClick={() => setOpen(true)}/>
-      <Button children={"Delete" } className='text-xs mt-4 ml-2' onClick={()=> onDelete(tradeId)}/>
+      <Button children={"Delete" } className='text-xs mt-4 ml-2' onClick={()=> onDelete({$id: tradeId, beforeChart, afterChart})}/>
      </div>
 
      <TradePreview open={open} onClose={()=> setOpen(false)} trade={tradeData}/>

@@ -11,7 +11,24 @@ function History() {
   const [allTrades, setAllTrades] = useState([]);
   const [loading, setLoading] = useState(true);
   
-  
+  const deleteTrade = async (trade) => {
+  try {
+    await trades.deleteTrade(trade.$id);
+
+    if (trade.afterChart)
+      await trades.deleteFile(trade.afterChart);
+
+    if (trade.beforeChart)
+      await trades.deleteFile(trade.beforeChart);
+
+    setAllTrades(prev =>
+      prev.filter(t => t.$id !== trade.$id)
+    );
+
+  } catch (err) {
+    console.error(err);
+  }
+};
   
   useEffect(() => {
     setLoading(true);
@@ -40,19 +57,9 @@ function History() {
   }, [tradesType, setAllTrades]);
 
 
-  const deleteTrade = async(tradeId)=>{
-    try{
-      await trades.deleteTrade(tradeId)
+  
 
-      setAllTrades(prev => prev.filter(trade => trade.$id !== tradeId));
-    }catch(err){
-      throw err;
-    }
-  };
-
-  useEffect(()=>{
-    
-  },[deleteTrade])
+  
 
   if(loading) return (
     <section className="mx-4 sm:mx-6 lg:mx-36 mt-10 min-h-screen">

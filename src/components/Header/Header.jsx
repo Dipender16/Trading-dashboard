@@ -3,7 +3,6 @@ import { Container, Logo } from "../index";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LogoutBtn from "./LogoutBtn";
-import logo from "../../assets/logo.png"
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
   const loading = useSelector((state) => state.auth.loading);
@@ -22,7 +21,7 @@ function Header() {
   if (loading) {
     return (
       <div className="py-3 px-6">
-        <Logo width="70px" src={logo}/>
+        <Logo width="70px"/>
       </div>
     );
   }
@@ -32,7 +31,7 @@ function Header() {
       <Container>
         <nav className="flex items-center justify-between">
           
-          <Logo src={logo}/>
+          <Logo/>
 
           
           <ul className="hidden md:flex items-center ml-auto">

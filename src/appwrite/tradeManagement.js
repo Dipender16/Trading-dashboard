@@ -92,6 +92,16 @@ export class Trades {
       Permission.write(Role.users()),
     ]);
   }
+
+  async deleteFile(file){
+    try{
+      await this.bucket.deleteFile(conf.appwriteBucketId, file)
+      return true;
+    }catch(err){
+      throw err;
+      return false
+    }
+  }
 }
 
 const trades = new Trades();

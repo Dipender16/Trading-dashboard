@@ -1,7 +1,6 @@
-import logo from "../assets/logo.png";
 
 function Logo({
-  src= logo,
+  src= "https://fra.cloud.appwrite.io/v1/storage/buckets/6968ebb4002826baec66/files/6998be27002b41621ceb/view?project=6968ea76002a08be25e4&mode=admin",
   className
 }) {
   return (
